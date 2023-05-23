@@ -2,8 +2,9 @@
 name: Build bird.camera
 on:
   push:
-    branches:
-      - main
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 jobs:
   build-site:
     runs-on: ubuntu-latest
