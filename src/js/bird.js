@@ -23,6 +23,13 @@ else if (video.canPlayType('application/vnd.apple.mpegurl')) {
     video.src = videoSrc;
 }
 
+window.flipBird = function() {
+    document.getElementById("birbLogo").classList.add("animate-flip-horizontal");
+}
+window.flipBirdMobile = function() {
+    document.getElementById("birbLogoMobile").classList.add("animate-flip-horizontal");
+}
+
 function getCurrentWeather() {
     fetch('https://bird.camera/current_weather.json')
     .then(response => response.json())
@@ -55,11 +62,11 @@ if ("serviceWorker" in navigator) {
     // register service worker
     navigator.serviceWorker.register("service-worker.js");
   }
-
 self.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible') {
         window.location.reload();
     }
 });
+
 
 getCurrentWeather();

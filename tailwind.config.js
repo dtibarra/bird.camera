@@ -2,8 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        "flip-horizontal": {
+          '50%': { transform: 'rotateY(180deg)' }
+        },
+      },
+      animation: {
+        "flip-horizontal": 'flip-horizontal 2s linear',
+      },
+    },
   },
   plugins: [],
 }
-
