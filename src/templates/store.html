@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSEP4944T7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSEP4944T7');
+  </script>
+  <title>Bird Camera - Cypress, Texas</title>
+  <meta name="apple-mobile-web-app-title" content="Bird.Camera">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/style.css" rel="stylesheet">
+  <script src="/js/bird.js" type="module"></script>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.3/hls.min.js"
+    integrity="sha512-0XFT2dFF4fgYmXkPwQrxKur1gisrxkMyHPGTS+uvw3EzsnDOsZZKoOuW1uwNZ73B1s1Njtx3RGFdUb79fYOwLA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.1/cdn.min.js"
+    integrity="sha512-aAki0RxJG+kdhKY+1E/hoHY46cOlpnMshmQBgZo1LIk2uY1+kLY4uB6W0DMNHpIr1nQ5qkdaCSakw7fcMfO+zg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+</head>
+
+<body>
+  <div class="bg-white" x-data="{ mobile_menu_open: false }">
+    <header class="absolute inset-x-0 top-0 z-50">
+      <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <div class="flex lg:flex-1">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Bird.Camera</span>
+            <div @click="flipBird();">
+              <object id="birbLogo" class="h-12 w-auto pointer-events-none" data="images/birb.svg"></object>
+            </div>
+          </a>
+        </div>
+        <div class="flex lg:hidden">
+          <button type="button" @click="mobile_menu_open = true"
+            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-12">
+          <a href="/" class="text-sm font-semibold leading-6 text-gray-900">Camera</a>
+          <a href="/store.html" class="text-sm font-semibold leading-6 text-gray-900">Store</a>
+        </div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        </div>
+      </nav>
+      <!-- Mobile menu, show/hide based on menu open state. -->
+      <div class="lg:hidden" x-cloak x-show="mobile_menu_open" role="dialog" aria-modal="true">
+        <!-- Background backdrop, show/hide based on slide-over state. -->
+        <div class="fixed inset-0 z-50"></div>
+        <div
+          class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div class="flex items-center justify-between">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">Bird.Camera</span>
+              <div @click="flipBirdMobile();">
+                <object id="birbLogoMobile" class="h-12 w-auto pointer-events-none" data="images/birb.svg"></object>
+              </div>
+            </a>
+            <button type="button" @click="mobile_menu_open = false" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+              <span class="sr-only">Close menu</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10">
+              <div class="space-y-2 py-6">
+                <a href="/"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Camera</a>
+                <a href="/store.html"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Store</a>
+              </div>
+              <div class="py-6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="relative isolate">
+      <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        aria-hidden="true">
+        <div
+          class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+      </div>
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="flow-root mt-24">
+          <main class="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8 bg-white shadow-[#24000a] shadow-lg">
+            <div class="border-b border-gray-200 pb-10 pt-24">
+              <h1 class="text-4xl font-bold tracking-tight text-gray-900">Bird.Camera Store</h1>
+              <p class="mt-4 text-base text-gray-500">Discover a paradise for bird lovers, offering top-notch feeders, high-quality seed, and state-of-the-art bird watching cameras. Embrace your passion and enhance your backyard birding experience!</p>
+            </div>
+              <section aria-labelledby="product-heading" class="mt-6 pt-6 lg:col-span-2 lg:mt-0 xl:col-span-3">
+                <h2 id="product-heading" class="sr-only">Products</h2>
+                <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5 pb-4">
+                  {% for product in products %}
+                  <div class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+                    <div class="aspect-h-4 aspect-w-3 bg-white-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
+                      <img src="{{ product.img_url}}" class="sm:w-full object-contain object-center sm:h-full ">
+                    </div>
+                    <div class="flex flex-1 flex-col space-y-2 p-4">
+                      <h3 class="text-sm font-medium text-gray-900">
+                        <a href="{{ product.url }}?tag={{ affiliate_tag }}">
+                          <span aria-hidden="true" class="absolute inset-0"></span>
+                          {{ product.title }}
+                        </a>
+                      </h3>
+                      <p class="text-sm text-gray-500">{{ product.description }}</p>
+    
+                      <div class="flex flex-1 flex-col justify-end">
+                        <div class="flex items-center">
+                          {% for rating in range(product.rating|int) %}
+                          <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                          </svg>
+                          {% endfor %}
+                          {% for rating in range(5-(product.rating|int)) %}
+                            <svg class="text-gray-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                            </svg>
+                          {% endfor %}
+                        </div>
+                        <p class="text-base font-medium text-gray-900">${{ product.price }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                </div>
+              </section>
+          </main>
+        </div>
+      </div>
+      <div
+        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true">
+        <div
+          class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>

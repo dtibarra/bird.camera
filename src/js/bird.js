@@ -1,28 +1,3 @@
-var video = document.getElementById('video');
-var videoSrc = 'https://bird.camera/stream/index.m3u8';
-if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
-    video.play();
-}
-// HLS.js is not supported on platforms that do not have Media Source
-// Extensions (MSE) enabled.
-//
-// When the browser has built-in HLS support (check using `canPlayType`),
-// we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video
-// element through the `src` property. This is using the built-in support
-// of the plain video element, without using HLS.js.
-//
-// Note: it would be more normal to wait on the 'canplay' event below however
-// on Safari (where you are most likely to find built-in HLS support) the
-// video.src URL must be on the user-driven white-list before a 'canplay'
-// event will be emitted; the last video event that can be reliably
-// listened-for when the URL is not on the white-list is 'loadedmetadata'.
-else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
-}
-
 window.flipBird = function() {
     document.getElementById("birbLogo").classList.add("animate-flip-horizontal");
 }
@@ -57,16 +32,42 @@ function getCurrentWeather() {
         setTimeout(getCurrentWeather, 1 * 60 * 1000);
     });
 }
+if (document.getElementById("temperature")){
+    getCurrentWeather();
+}
+var video = document.getElementById('video');
+if (video) {
+    var videoSrc = 'https://bird.camera/stream/index.m3u8';
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        video.play();
+    }
+    // HLS.js is not supported on platforms that do not have Media Source
+    // Extensions (MSE) enabled.
+    //
+    // When the browser has built-in HLS support (check using `canPlayType`),
+    // we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video
+    // element through the `src` property. This is using the built-in support
+    // of the plain video element, without using HLS.js.
+    //
+    // Note: it would be more normal to wait on the 'canplay' event below however
+    // on Safari (where you are most likely to find built-in HLS support) the
+    // video.src URL must be on the user-driven white-list before a 'canplay'
+    // event will be emitted; the last video event that can be reliably
+    // listened-for when the URL is not on the white-list is 'loadedmetadata'.
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+    }
+}
 
-if ("serviceWorker" in navigator) {
+/*if ("serviceWorker" in navigator) {
     // register service worker
     navigator.serviceWorker.register("service-worker.js");
-  }
+}
 self.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible') {
         window.location.reload();
     }
-});
-
-
-getCurrentWeather();
+});*/
