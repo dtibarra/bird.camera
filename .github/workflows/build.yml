@@ -27,5 +27,5 @@ jobs:
         run: npm run build
       - name: Build image
         run: |
-          docker build . --tag ghcr.io/dtibarra/store:latest
-          docker push ghcr.io/dtibarra/store:latest
+          docker build . --tag ghcr.io/dtibarra/birdcamera:latest
+          docker push ghcr.io/dtibarra/birdcamera:latest
