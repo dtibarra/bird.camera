@@ -1,11 +1,19 @@
 import compress from 'vite-plugin-compress'
 import { VitePWA } from 'vite-plugin-pwa'
+import { resolve } from 'path'
+
 export default {
     root: 'src',
     publicDir: 'public',
     build: {
       outDir: '../dist',
-      emptyOutDir: true
+      emptyOutDir: true,
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'src/index.html'),
+          nested: resolve(__dirname, 'src/store.html'),
+        }
+      }
     },
     plugins: [
         VitePWA({

@@ -16,13 +16,18 @@ function getCurrentWeather() {
         let windDirection = data.windDirection
         document.getElementById("temperature").textContent = temperature + '°F'
         document.getElementById("relativeHumidity").textContent = relativeHumidity + '%'
-        document.getElementById("heatIndex").textContent = '(Feels like '+ heatIndex + '°F)'
         document.getElementById("windSpeed").textContent = windSpeed + ' MPH'
         if (windDirection === null) {
             document.getElementById("windDirection").textContent = ""
         } else {
             document.getElementById("windDirection").textContent = windDirection
-        }      
+        }
+        if (heatIndex === null) {
+            document.getElementById("heatIndex").textContent = ''
+        } else {
+            document.getElementById("heatIndex").textContent = '(Feels like '+ heatIndex + '°F)'
+        }
+
         // Polling interval: 5 minutes (adjust this to the desired polling interval)
         setTimeout(getCurrentWeather, 5 * 60 * 1000);
     })
