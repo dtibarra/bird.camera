@@ -1,21 +1,23 @@
-import compress from 'vite-plugin-compress'
 import { VitePWA } from 'vite-plugin-pwa'
 import { resolve } from 'path'
+import forwardToTrailingSlash from './vite/forward-to-trailing-slash.js'
 
+const build = {
+  outDir: '../dist',
+  emptyOutDir: true,
+  rollupOptions: {
+    input: {
+      index: resolve(__dirname, 'src/index.html'),
+      store: resolve(__dirname, 'src/store/index.html'),
+    }
+  }
+};
 export default {
     root: 'src',
     publicDir: 'public',
-    build: {
-      outDir: '../dist',
-      emptyOutDir: true,
-      rollupOptions: {
-        input: {
-          main: resolve(__dirname, 'src/index.html'),
-          nested: resolve(__dirname, 'src/store.html'),
-        }
-      }
-    },
+    build: build,
     plugins: [
+      forwardToTrailingSlash(Object.keys(build.rollupOptions.input)),
         VitePWA({
           "manifest": {
             name: "Bird Camera",
