@@ -1,2 +1,2 @@
 * * * * * /usr/bin/python3 /root/get_curr_weather.py 2>&1
-* * * * * /usr/bin/ffmpeg -y -i $(/bin/ls -t /var/www/html/stream | head -n1) -ss 00:00:00.00 -vframes 1 /var/www/html/images/screenshot.jpg
+* * * * * /usr/bin/ffmpeg -y -i /var/www/html/stream/$(/bin/ls -t /var/www/html/stream | head -n1) -ss 00:00:00.00 -vframes 1 /var/www/html/images/screenshot.jpg
