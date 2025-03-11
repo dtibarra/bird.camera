@@ -1,7 +1,7 @@
 FROM nginx:mainline-alpine
 
 # Install cron and supervisor
-RUN apk add --update --no-cache supervisor python3 py3-pip ffmpeg py3-requests && mkdir -p /var/www/html/stream 
+RUN apk add --update --no-cache supervisor python3 py3-pip ffmpeg py3-requests && mkdir -p /var/www/html/stream  && mkdir -p /var/www/html/stream2
 
 # Add supervisor config
 COPY config/supervisord.conf /etc/supervisord.conf
