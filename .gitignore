@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .openai_key
+
+# Python cache
+__pycache__/
+*.pyc
