@@ -7,9 +7,9 @@ def get_weather_data():
     data = response.json()
 
     if response.status_code == 200:
-        temp_fahrenheit = round(data['properties']['temperature']['value'] * 9/5 + 32,1)
+        temp_celsius = round(data['properties']['temperature']['value'],1)
         relative_humidity = round(data['properties']['relativeHumidity']['value'],1)
-        heat_index = round(data['properties']['heatIndex']['value'] * 9/5 + 32,1) if data['properties']['heatIndex']['value'] is not None else None
+        heat_index = round(data['properties']['heatIndex']['value'],1) if data['properties']['heatIndex']['value'] is not None else None
         wind_speed = data['properties']['windSpeed']['value']
         wind_direction_degrees = data['properties']['windDirection']['value']
         if wind_speed == 0 or wind_direction_degrees is None:
@@ -22,7 +22,7 @@ def get_weather_data():
 
 
         return {
-            "temperature": temp_fahrenheit,
+            "temperature": temp_celsius,
             "relativeHumidity": relative_humidity,
             "heatIndex": heat_index,
             "windSpeed": wind_speed,
